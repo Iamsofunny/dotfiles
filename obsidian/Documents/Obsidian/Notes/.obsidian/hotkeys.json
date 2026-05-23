@@ -1,0 +1,10 @@
+{
+  "better-mathjax:better-mathjax-show-mathjax-helper-on-current-selection": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": " "
+    }
+  ]
+}

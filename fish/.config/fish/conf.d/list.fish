@@ -1,0 +1,5 @@
+alias ll="ls -lh --group-directories-first"
+alias lla="ls -lah --group-directories-first"
+alias la="ls -ah --group-directories-first"
+alias l.="ls -d .* --color=auto --group-directories-first"
+alias list="ls -halt | head"
