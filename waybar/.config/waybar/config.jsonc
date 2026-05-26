@@ -21,7 +21,6 @@
     "bluetooth",
     "backlight",
     "battery",
-    "custom/swaync",
     "idle_inhibitor",
     "tray"
   ],
@@ -38,8 +37,8 @@
   // ── Center ─────────────────────────────────────────────────────────────────
 
   "clock": {
-    "format": "{:%I:%M %p – %A, %b %e}",
-    "format-alt": "{:%Y-%m-%d}",
+    "format": "󰥔 {:%H:%M 󰃮 %B %d, %Y}",
+    "format-alt": "󰥔 {:%H:%M}",
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
     "calendar": {
       "mode": "month",
@@ -55,17 +54,15 @@
       }
     },
     "actions": {
-      "on-click-right": "shift_down",
-      "on-click-forward": "shift_up",
-      "on-scroll-up": "shift_up",
-      "on-scroll-down": "shift_down"
+      "on-scroll-up": "shift_down",
+      "on-scroll-down": "shift_up"
     }
   },
 
   // ── Right ──────────────────────────────────────────────────────────────────
 
   "network": {
-    "format-wifi": "  {essid}",
+    "format-wifi": "󰤨  {essid}",
     "format-ethernet": "󰈀  {ifname}",
     "format-disconnected": "󰤭  offline",
     "format-linked": "󰈀  {ifname} (no IP)",
@@ -85,7 +82,7 @@
       "default": ["󰕿", "󰖀", "󰕾"]
     },
     "scroll-step": 2,
-    "on-click": "pwvucontrol",
+    "on-click": "pavucontrol",
     "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
     "tooltip-format": "{desc} – {volume}%"
   },
@@ -95,8 +92,8 @@
     "format-connected": "󰂱  {device_alias}",
     "format-connected-battery": "󰂱  {device_alias} {device_battery_percentage}%",
     "format-off": "󰂲  off",
-    "tooltip-format": "{controller_alias}\n{num_connections} connected",
-    "tooltip-format-connected": "{controller_alias}\n{num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format": "{num_connections} connected",
+    "tooltip-format-connected": "{num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}",
     "tooltip-format-enumerate-connected-battery": "{device_alias} 󰁹 {device_battery_percentage}%",
     "on-click": "blueman-manager"
@@ -108,7 +105,7 @@
     "format-icons": ["󰃞", "󰃟", "󰃠"],
     "scroll-step": 5,
     "on-scroll-up": "brightnessctl set +5%",
-    "on-scroll-down": "brightnessctl set 5%-",
+    "on-scroll-down": "brightnessctl set 5%- --min-value=19950", // Max brightness: 399000
     "smooth-scrolling-threshold": 1
   },
 
@@ -122,29 +119,8 @@
     "format-plugged": "󰚥  {capacity}%",
     "format-full": "󰁹  full",
     "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-    "tooltip-format": "{time} remaining\n{power} W",
+    "tooltip-format": "{time} remaining",
     "interval": 30
-  },
-
-  "custom/swaync": {
-    "tooltip": false,
-    "format": "{icon}  {alt}",
-    "format-icons": {
-      "notification": "󱅫",
-      "none": "󰂚",
-      "dnd-notification": "󰂛",
-      "dnd-none": "󰪑",
-      "inhibited-notification": "󱅫",
-      "inhibited-none": "󰂚",
-      "dnd-inhibited-notification": "󰂛",
-      "dnd-inhibited-none": "󰪑"
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
-    "escape": true
   },
 
   "idle_inhibitor": {
