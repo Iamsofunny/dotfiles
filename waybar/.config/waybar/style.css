@@ -1,6 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════════════════
    Waybar – Dark bar, blue accents  (inspired by OMARCHY / Bad Bunny edition)
    ═══════════════════════════════════════════════════════════════════════════ */
+@import "colors.css";
 
 /* ── Variables ─────────────────────────────────────────────────────────── */
 * {
@@ -14,36 +15,25 @@
 
 /* ── Base bar ───────────────────────────────────────────────────────────── */
 window#waybar {
-  background-color: #0f1117;
-  color: #c8d3e8;
-  border-bottom: 1px solid #1e2535;
+  background-color: @background;
+  color: @text;
+  border-bottom: 1px solid @border;
 }
 
 /* ── Tooltip ────────────────────────────────────────────────────────────── */
 tooltip {
-  background: #0f1117;
-  border: 1px solid #1a6fd4;
-  color: #c8d3e8;
+  background: @background;
+  border: 1px solid @active;
   border-radius: 4px;
   padding: 4px 8px;
 }
 tooltip label {
-  color: #c8d3e8;
+  color: @text;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
    LEFT
    ══════════════════════════════════════════════════════════════════════════ */
-
-/* Logo */
-#custom-logo {
-  color: #4a9eff;
-  background: #0f1117;
-  padding: 0 14px 0 10px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  border-right: 1px solid #1e2535;
-}
 
 /* Workspaces */
 #workspaces {
@@ -53,7 +43,7 @@ tooltip label {
 #workspaces button {
   padding: 0 8px;
   margin: 4px 2px;
-  color: #5a6a8a;
+  color: @text-inactive;
   background: transparent;
   border-radius: 3px;
   transition: all 120ms ease;
@@ -61,27 +51,20 @@ tooltip label {
 }
 
 #workspaces button:hover {
-  color: #7eb8f7;
-  background: #1a2540;
+  color: @text-hover;
+  background: @background-hover;
 }
 
-/* Numbered accent colours — cycle through blues like the orange in screenshot */
-#workspaces button:nth-child(1)  { color: #4a9eff; }
-#workspaces button:nth-child(2)  { color: #5aa8ff; }
-#workspaces button:nth-child(3)  { color: #6ab2ff; }
-#workspaces button:nth-child(4)  { color: #3a8eef; }
-#workspaces button:nth-child(5)  { color: #2a7edf; }
-
 #workspaces button.active {
-  color: #ffffff;
-  background: #1a6fd4;
+  color: @text;
+  background: @active;
   font-weight: 800;
   border-radius: 3px;
 }
 
 #workspaces button.urgent {
-  color: #ff5555;
-  background: #2a1020;
+  color: @urgent;
+  background: @background-urgent;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -89,14 +72,14 @@ tooltip label {
    ══════════════════════════════════════════════════════════════════════════ */
 
 #clock {
-  color: #c8d3e8;
+  color: @text;
   padding: 0 14px;
   font-weight: 500;
   letter-spacing: 0.02em;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   RIGHT – shared pill style
+   RIGHT
    ══════════════════════════════════════════════════════════════════════════ */
 
 /* Every right-side module */
@@ -105,12 +88,11 @@ tooltip label {
 #bluetooth,
 #backlight,
 #battery,
-#custom-swaync,
-#idle-inhibitor,
+#idle_inhibitor,
 #tray {
   padding: 0 10px;
-  color: #9aaec8;
-  border-left: 1px solid #1a2030;
+  color: @text;
+  border-left: 1px solid @border;
   transition: color 150ms ease, background 150ms ease;
 }
 
@@ -118,53 +100,50 @@ tooltip label {
 #pulseaudio:hover,
 #bluetooth:hover,
 #backlight:hover,
-#custom-swaync:hover,
-#idle-inhibitor:hover {
-  color: #7eb8f7;
-  background: #121824;
+#battery:hover,
+#idle_inhibitor:hover {
+  color: @text-hover;
+  background: @background-hover;
 }
 
 /* ── Network ─────────────────────────────────────────────────────────────── */
 #network.disconnected {
-  color: #5a6a8a;
-}
-#network.wifi {
-  color: #9aaec8;
+  color: @text-inactive;
 }
 
 /* ── Audio ──────────────────────────────────────────────────────────────── */
 #pulseaudio.muted {
-  color: #5a6a8a;
+  color: @text-inactive;
 }
 
 /* ── Bluetooth ──────────────────────────────────────────────────────────── */
 #bluetooth.connected {
-  color: #4a9eff;
+  color: @text-active;
 }
 #bluetooth.off {
-  color: #3a4a6a;
+  color: @text-inactive;
 }
 
 /* ── Backlight ──────────────────────────────────────────────────────────── */
 #backlight {
-  color: #9aaec8;
+  color: @text;
 }
 
 /* ── Battery ────────────────────────────────────────────────────────────── */
 #battery {
-  color: #9aaec8;
+  color: @text;
 }
 #battery.charging {
-  color: #4a9eff;
+  color: @text-active;
 }
 #battery.plugged {
-  color: #7eb8f7;
+  color: @text-active;
 }
 #battery.warning:not(.charging) {
-  color: #f0a030;
+  color: @warning;
 }
 #battery.critical:not(.charging) {
-  color: #ff5555;
+  color: @urgent;
   animation: blink 1s ease-in-out infinite alternate;
 }
 
@@ -173,22 +152,13 @@ tooltip label {
   to   { opacity: 0.4; }
 }
 
-/* ── SwayNC ─────────────────────────────────────────────────────────────── */
-#custom-swaync.notification {
-  color: #4a9eff;
-}
-#custom-swaync.dnd-notification,
-#custom-swaync.dnd-none {
-  color: #5a6a8a;
-}
-
 /* ── Idle Inhibitor (block sleep) ─────────────────────────────────────── */
-#idle-inhibitor.activated {
-  color: #4a9eff;
-  background: #0d1828;
+#idle_inhibitor.activated {
+  color: @text-active;
+  background: @background-active;
 }
-#idle-inhibitor.deactivated {
-  color: #5a6a8a;
+#idle_inhibitor.deactivated {
+  color: @text-inactive;
 }
 
 /* ── Tray ────────────────────────────────────────────────────────────────── */
@@ -200,5 +170,5 @@ tooltip label {
 }
 #tray > .needs-attention {
   -gtk-icon-effect: highlight;
-  background-color: #1a3060;
+  background-color: @background-attention;
 }

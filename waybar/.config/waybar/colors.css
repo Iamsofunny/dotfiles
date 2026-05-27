@@ -1,0 +1,17 @@
+
+@define-color background #0f1117;
+@define-color background-hover #121824;
+@define-color background-urgent #2a1020;
+@define-color background-active #0d1828;
+@define-color background-attention #1a3060;
+
+@define-color border #1a2030;
+
+@define-color active #1a6fd4;
+@define-color urgent #ff5555;
+@define-color warning #f0a030;
+
+@define-color text #9aaec8;
+@define-color text-active #4a9eff;
+@define-color text-inactive #5a6a8a;
+@define-color text-hover #7eb8f7;

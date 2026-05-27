@@ -62,28 +62,28 @@
   // ── Right ──────────────────────────────────────────────────────────────────
 
   "network": {
-    "format-wifi": "󰤨  {essid}",
-    "format-ethernet": "󰈀  {ifname}",
-    "format-disconnected": "󰤭  offline",
-    "format-linked": "󰈀  {ifname} (no IP)",
+    "format-wifi": "󰤨",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󰤭",
+    "format-linked": "󰈀  (no IP)",
     "tooltip-format-wifi": "{essid}  {signalStrength}%\n{ipaddr}/{cidr}",
     "tooltip-format-ethernet": "{ifname}\n{ipaddr}/{cidr}",
     "tooltip-format-disconnected": "Disconnected",
-    "on-click": "nm-connection-editor",
+    // "on-click": "nm-connection-editor",
     "interval": 5
   },
 
   "pulseaudio": {
     "format": "{icon}  {volume}%",
-    "format-muted": "󰝟  muted",
+    "format-muted": "󰝟  {volume}%",
     "format-icons": {
       "headphone": "󰋋",
       "headset": "󰋎",
       "default": ["󰕿", "󰖀", "󰕾"]
     },
     "scroll-step": 2,
-    "on-click": "pavucontrol",
-    "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    // "on-click": "pavucontrol",
+    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
     "tooltip-format": "{desc} – {volume}%"
   },
 
@@ -96,7 +96,7 @@
     "tooltip-format-connected": "{num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}",
     "tooltip-format-enumerate-connected-battery": "{device_alias} 󰁹 {device_battery_percentage}%",
-    "on-click": "blueman-manager"
+    // "on-click": "blueman-manager"
   },
 
   "backlight": {
@@ -104,9 +104,10 @@
     "format": "{icon}  {percent}%",
     "format-icons": ["󰃞", "󰃟", "󰃠"],
     "scroll-step": 5,
-    "on-scroll-up": "brightnessctl set +5%",
-    "on-scroll-down": "brightnessctl set 5%- --min-value=19950", // Max brightness: 399000
-    "smooth-scrolling-threshold": 1
+    "smooth-scrolling-threshold": 1,
+    "min-brightness": 5
+    // "on-scroll-up": "brightnessctl set +5%",
+    // "on-scroll-down": "brightnessctl set 5%- --min-value=19950", // Max brightness: 399000
   },
 
   "battery": {
@@ -119,7 +120,7 @@
     "format-plugged": "󰚥  {capacity}%",
     "format-full": "󰁹  full",
     "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-    "tooltip-format": "{time} remaining",
+    "tooltip-format": "{time} remaining\n{power} W\n{health}%",
     "interval": 30
   },
 
