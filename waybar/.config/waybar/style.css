@@ -5,9 +5,8 @@
 
 /* ── Variables ─────────────────────────────────────────────────────────── */
 * {
-  font-family: "JetBrainsMono Nerd Font", "Iosevka Nerd Font", monospace;
+  font-family: "JetBrainsMono Nerd Font", monospace;
   font-size: 12px;
-  font-weight: 500;
   border: none;
   border-radius: 0;
   min-height: 0;
@@ -25,7 +24,6 @@ tooltip {
   background: @background;
   border: 1px solid @active;
   border-radius: 4px;
-  padding: 4px 8px;
 }
 tooltip label {
   color: @text;
@@ -43,7 +41,7 @@ tooltip label {
 #workspaces button {
   padding: 0 8px;
   margin: 4px 2px;
-  color: @text-inactive;
+  color: @white;
   background: transparent;
   border-radius: 3px;
   transition: all 120ms ease;
@@ -51,15 +49,16 @@ tooltip label {
 }
 
 #workspaces button:hover {
-  color: @text-hover;
   background: @background-hover;
 }
 
 #workspaces button.active {
-  color: @text;
   background: @active;
-  font-weight: 800;
   border-radius: 3px;
+}
+
+#qorkspaces button.empty {
+  border: 1px solid @border;
 }
 
 #workspaces button.urgent {
@@ -89,6 +88,7 @@ tooltip label {
 #backlight,
 #battery,
 #idle_inhibitor,
+#custom-launcher,
 #tray {
   padding: 0 10px;
   color: @text;
@@ -106,6 +106,14 @@ tooltip label {
   background: @background-hover;
 }
 
+#custom-launcher,
+#idle_inhibitor,
+#network.wifi,
+#network.ethernet,
+#network.disconnected {
+  padding: 0px 14px 0px 10px;
+}
+
 /* ── Network ─────────────────────────────────────────────────────────────── */
 #network.disconnected {
   color: @text-inactive;
@@ -120,6 +128,8 @@ tooltip label {
 #bluetooth.connected {
   color: @text-active;
 }
+
+#bluetooth.disabled,
 #bluetooth.off {
   color: @text-inactive;
 }
@@ -145,11 +155,6 @@ tooltip label {
 #battery.critical:not(.charging) {
   color: @urgent;
   animation: blink 1s ease-in-out infinite alternate;
-}
-
-@keyframes blink {
-  from { opacity: 1; }
-  to   { opacity: 0.4; }
 }
 
 /* ── Idle Inhibitor (block sleep) ─────────────────────────────────────── */

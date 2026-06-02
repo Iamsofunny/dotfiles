@@ -22,7 +22,7 @@
     "backlight",
     "battery",
     "idle_inhibitor",
-    "tray"
+    "group/launcher"
   ],
 
   // ── Left ──────────────────────────────────────────────────────────────────
@@ -121,7 +121,6 @@
     "format-full": "󰁹  full",
     "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
     "tooltip-format": "{time} remaining\n{power} W\n{health}%",
-    "interval": 30
   },
 
   "idle_inhibitor": {
@@ -133,7 +132,21 @@
     "tooltip-format-activated": "Sleep blocked",
     "tooltip-format-deactivated": "Auto-sleep enabled"
   },
-
+  "group/launcher": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 500,
+      "children-class": "launcher,",
+      "transition-left-to-right": true
+    },
+    "modules": [
+      "custom/launcher",
+      "tray"
+    ]
+  },
+  "custom/launcher": {
+    "format": "󱎂"
+  },
   "tray": {
     "icon-size": 14,
     "spacing": 8

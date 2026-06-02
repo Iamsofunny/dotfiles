@@ -219,8 +219,10 @@ layout {
     struts 
 }
 
-spawn-at-startup "waybar"
+// spawn-at-startup "waybar"
+spawn-at-startup "/home/matze/.config/waybar/launch-waybar"
 spawn-at-startup "pasystray"
+spawn-at-startup "swaync"
 
 prefer-no-csd
 
