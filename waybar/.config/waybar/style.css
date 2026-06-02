@@ -82,6 +82,7 @@ tooltip label {
    ══════════════════════════════════════════════════════════════════════════ */
 
 /* Every right-side module */
+#cpu,
 #network,
 #pulseaudio,
 #bluetooth,
@@ -96,6 +97,7 @@ tooltip label {
   transition: color 150ms ease, background 150ms ease;
 }
 
+#cpu:hover,
 #network:hover,
 #pulseaudio:hover,
 #bluetooth:hover,
@@ -106,6 +108,7 @@ tooltip label {
   background: @background-hover;
 }
 
+#cpu,
 #custom-launcher,
 #idle_inhibitor,
 #network.wifi,
