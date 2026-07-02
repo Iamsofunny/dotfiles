@@ -89,8 +89,9 @@ tooltip label {
 #backlight,
 #battery,
 #idle_inhibitor,
-#custom-launcher,
-#tray {
+#custom-notification,
+#tray,
+#custom-power {
   padding: 0 10px;
   color: @text;
   border-left: 1px solid @border;
@@ -103,7 +104,8 @@ tooltip label {
 #bluetooth:hover,
 #backlight:hover,
 #battery:hover,
-#idle_inhibitor:hover {
+#idle_inhibitor:hover,
+#custom-notification:hover {
   color: @text-hover;
   background: @background-hover;
 }
@@ -169,6 +171,18 @@ tooltip label {
   color: @text-inactive;
 }
 
+/* ── Notifications (swaync) ──────────────────────────────────────────────── */
+#custom-notification.notification,
+#custom-notification.inhibited-notification {
+  color: @text-active;
+}
+#custom-notification.dnd-none,
+#custom-notification.dnd-notification,
+#custom-notification.dnd-inhibited-none,
+#custom-notification.dnd-inhibited-notification {
+  color: @text-inactive;
+}
+
 /* ── Tray ────────────────────────────────────────────────────────────────── */
 #tray {
   padding: 0 8px;
@@ -179,4 +193,30 @@ tooltip label {
 #tray > .needs-attention {
   -gtk-icon-effect: highlight;
   background-color: @background-attention;
+}
+
+/* ── Power menu ─────────────────────────────────────────────────────────── */
+#custom-power:hover {
+  color: @urgent;
+  background: @background-hover;
+}
+
+menu {
+  background: @background;
+  border: 1px solid @border;
+  border-radius: 6px;
+  padding: 4px;
+}
+menu menuitem {
+  color: @text;
+  padding: 5px 12px;
+  border-radius: 4px;
+}
+menu menuitem:hover {
+  background: @background-hover;
+  color: @text-hover;
+}
+menu separator {
+  background: @border;
+  margin: 4px 2px;
 }

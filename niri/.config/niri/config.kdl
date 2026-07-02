@@ -41,11 +41,20 @@ output "HDMI-A-1" {
     variable-refresh-rate
 }
 
+// Compositor-scoped environment (three-sink rule — see nix/modules/env.nix:
+// system-universal vars live in environment.sessionVariables, shell-only
+// conveniences in home.sessionVariables).
+environment {
+    QT_QPA_PLATFORM "wayland"
+    XCURSOR_THEME "Adwaita"
+    XCURSOR_SIZE "24"
+}
+
 binds {
     // Programme.
     Mod+Return hotkey-overlay-title="Open a Terminal: kitty" 		{ spawn "kitty"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" 	{ spawn "fuzzel"; }
-    Super+L hotkey-overlay-title="Lock the Screen: swaylock" 	{ spawn "swaylock"; }
+    Super+L hotkey-overlay-title="Lock the Screen: swaylock" 	{ spawn "swaylock" "-f"; }
     Mod+B { spawn "firefox"; }
     Mod+E { spawn "nautilus"; }
     Mod+O { spawn "obsidian"; }
@@ -219,6 +228,8 @@ layout {
     struts 
 }
 
+// NixOS: DELETE the waybar line below — waybar runs as a systemd user
+// service there (nix/modules/waybar.nix); spawning it here too starts two bars.
 // spawn-at-startup "waybar"
 spawn-at-startup "/home/matze/.config/waybar/launch-waybar"
 spawn-at-startup "pasystray"

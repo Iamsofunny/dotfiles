@@ -1,0 +1,16 @@
+{
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+  "positionX": "right",
+  "positionY": "top",
+  "layer": "overlay",
+  "control-center-layer": "top",
+  "timeout": 10,
+  "timeout-low": 5,
+  "timeout-critical": 0,
+  "notification-window-width": 400,
+  "control-center-width": 420,
+  "fit-to-screen": true,
+  "keyboard-shortcuts": true,
+  "hide-on-clear": true,
+  "hide-on-action": true
+}

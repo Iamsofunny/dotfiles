@@ -1,0 +1,24 @@
+/* PLACEHOLDER — replace with your real swaync theme.
+   Out-of-store symlink: edit here and hot-reload with
+     swaync-client --reload-css
+   (no rebuild needed). */
+
+@define-color background #0f1117;
+@define-color background-hover #121824;
+@define-color border #1a2030;
+@define-color active #1a6fd4;
+@define-color text #9aaec8;
+
+.notification {
+  background: @background;
+  border: 1px solid @border;
+  border-radius: 8px;
+  color: @text;
+}
+
+.control-center {
+  background: @background;
+  border: 1px solid @active;
+  border-radius: 8px;
+  color: @text;
+}

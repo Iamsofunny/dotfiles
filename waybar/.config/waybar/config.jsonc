@@ -23,7 +23,9 @@
     "backlight",
     "battery",
     "idle_inhibitor",
-    "group/launcher"
+    "custom/notification",
+    "tray",
+    "custom/power"
   ],
 
   // ── Left ──────────────────────────────────────────────────────────────────
@@ -138,23 +140,46 @@
     "tooltip-format-activated": "Sleep blocked",
     "tooltip-format-deactivated": "Auto-sleep enabled"
   },
-  "group/launcher": {
-    "orientation": "horizontal",
-    "drawer": {
-      "transition-duration": 500,
-      "children-class": "launcher,",
-      "transition-left-to-right": true
+
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "󱅫",
+      "none": "󰂚",
+      "dnd-notification": "󰂛",
+      "dnd-none": "󰂛",
+      "inhibited-notification": "󱅫",
+      "inhibited-none": "󰂚",
+      "dnd-inhibited-notification": "󰂛",
+      "dnd-inhibited-none": "󰂛"
     },
-    "modules": [
-      "custom/launcher",
-      "tray"
-    ]
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
   },
-  "custom/launcher": {
-    "format": "󱎂"
-  },
+
   "tray": {
     "icon-size": 14,
     "spacing": 8
+  },
+
+  "custom/power": {
+    "tooltip": false,
+    "format": "󰐥",
+    "menu": "on-click",
+    "menu-file": "$HOME/.config/waybar/power_menu.xml",
+    "menu-actions": {
+      // lock goes through loginctl so swayidle's `lock` handler
+      // (swaylock -f) stays the single brain.
+      "lock": "loginctl lock-session",
+      "suspend": "systemctl suspend",
+      "logout": "niri msg action quit --skip-confirmation",
+      "reboot": "systemctl reboot",
+      "shutdown": "systemctl poweroff"
+    }
   }
 }

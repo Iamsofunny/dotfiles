@@ -1,0 +1,18 @@
+# swayidle — single brain for idle + lock.
+# HM owns only the systemd unit (nix/modules/idle-lock.nix); behaviour lives here.
+#
+# Timeouts are STARTER VALUES (seconds) — tune freely, then:
+#   systemctl --user restart swayidle.service
+#
+# swaylock always runs with -f: fork only after the lock surface is up.
+# Without it, before-sleep returns before the screen is locked and a resume
+# from suspend lands on an unlocked session.
+
+timeout 300 'swaylock -f'
+timeout 360 'niri msg action power-off-monitors' resume 'niri msg action power-on-monitors'
+
+# Lock-before-suspend guarantee (lid close → suspend path).
+before-sleep 'swaylock -f'
+
+# loginctl lock-session / lid path.
+lock 'swaylock -f'
