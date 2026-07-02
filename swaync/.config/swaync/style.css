@@ -1,24 +1,367 @@
-/* PLACEHOLDER — replace with your real swaync theme.
+/* ═══════════════════════════════════════════════════════════════════════════
+   swaync – Dark, blue accents; mirrors waybar/.config/waybar/style.css
+   ═══════════════════════════════════════════════════════════════════════════
+   Colors are duplicated from waybar/.config/waybar/colors.css — keep the two
+   files in sync when changing the palette (GTK @import across config dirs is
+   unreliable through the store/stow symlinks).
+
    Out-of-store symlink: edit here and hot-reload with
      swaync-client --reload-css
    (no rebuild needed). */
 
 @define-color background #0f1117;
 @define-color background-hover #121824;
+@define-color background-urgent #2a1020;
+@define-color background-active #0d1828;
+
 @define-color border #1a2030;
+
 @define-color active #1a6fd4;
+@define-color urgent #ff5555;
+@define-color warning #f0a030;
+
 @define-color text #9aaec8;
+@define-color text-active #4a9eff;
+@define-color text-inactive #5a6a8a;
+@define-color text-hover #7eb8f7;
+
+@define-color white #ffffff;
+
+* {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 12px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   FLOATING NOTIFICATIONS (popups)
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.notification-row {
+  outline: none;
+  background: transparent;
+}
 
 .notification {
   background: @background;
   border: 1px solid @border;
   border-radius: 8px;
   color: @text;
+  margin: 4px;
+  box-shadow: none;
 }
+
+.notification.critical {
+  border: 1px solid @urgent;
+  background: @background-urgent;
+}
+
+.notification-content {
+  padding: 8px;
+}
+
+.notification-default-action,
+.notification-action {
+  background: transparent;
+  border: none;
+  color: @text;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.notification-default-action:hover,
+.notification-action:hover {
+  background: @background-hover;
+  color: @text-hover;
+}
+
+/* Action buttons row under the body */
+.notification-action {
+  border-top: 1px solid @border;
+  border-radius: 0;
+}
+
+.notification .summary {
+  color: @white;
+  font-weight: 500;
+}
+
+.notification .time {
+  color: @text-inactive;
+}
+
+.notification .body {
+  color: @text;
+}
+
+.close-button {
+  background: transparent;
+  color: @text-inactive;
+  border-radius: 4px;
+  margin: 4px;
+  padding: 0;
+}
+
+.close-button:hover {
+  background: @background-hover;
+  color: @urgent;
+}
+
+/* Progress bar (e.g. downloads, volume OSD notifications) */
+.notification progressbar,
+.notification progress,
+.notification trough {
+  border-radius: 4px;
+}
+
+.notification progressbar progress {
+  background: @active;
+}
+
+/* Inline reply (notification-inline-replies) */
+.inline-reply-entry {
+  background: @background-hover;
+  color: @text;
+  border: 1px solid @border;
+  border-radius: 4px;
+  caret-color: @text;
+}
+
+.inline-reply-button {
+  background: transparent;
+  color: @text;
+  border: 1px solid @border;
+  border-radius: 4px;
+  margin-left: 4px;
+}
+
+.inline-reply-button:hover {
+  background: @background-active;
+  color: @text-hover;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   CONTROL CENTER
+   ══════════════════════════════════════════════════════════════════════════ */
 
 .control-center {
   background: @background;
   border: 1px solid @active;
   border-radius: 8px;
   color: @text;
+}
+
+.control-center-list {
+  background: transparent;
+}
+
+.control-center .notification {
+  background: @background-hover;
+}
+
+.control-center .notification:hover {
+  background: @background-active;
+}
+
+/* Grouped notifications (collapsed app groups) */
+.notification-group {
+  margin: 2px 6px;
+}
+
+.notification-group-headers {
+  color: @white;
+  font-weight: 500;
+}
+
+.notification-group-icon,
+.notification-group-collapse-button,
+.notification-group-close-all-button {
+  background: transparent;
+  color: @text;
+  border: none;
+  border-radius: 4px;
+}
+
+.notification-group-collapse-button:hover,
+.notification-group-close-all-button:hover {
+  background: @background-hover;
+  color: @text-hover;
+}
+
+/* ── Widget: title ─────────────────────────────────────────────────────── */
+.widget-title {
+  color: @white;
+  font-weight: 500;
+  margin: 4px;
+}
+
+.widget-title > button {
+  background: transparent;
+  color: @text;
+  border: 1px solid @border;
+  border-radius: 4px;
+  padding: 2px 10px;
+  transition: all 150ms ease;
+}
+
+.widget-title > button:hover {
+  background: @background-hover;
+  color: @text-hover;
+}
+
+/* ── Widget: inhibitors ────────────────────────────────────────────────── */
+.widget-inhibitors {
+  color: @warning;
+  margin: 4px;
+}
+
+.widget-inhibitors > button {
+  background: transparent;
+  color: @text;
+  border: 1px solid @border;
+  border-radius: 4px;
+  padding: 2px 10px;
+}
+
+.widget-inhibitors > button:hover {
+  background: @background-hover;
+  color: @text-hover;
+}
+
+/* ── Widget: do-not-disturb ────────────────────────────────────────────── */
+.widget-dnd {
+  color: @white;
+  margin: 4px;
+}
+
+.widget-dnd > switch {
+  background: @background-hover;
+  border: 1px solid @border;
+  border-radius: 12px;
+}
+
+.widget-dnd > switch:checked {
+  background: @active;
+}
+
+.widget-dnd > switch slider {
+  background: @text;
+  border-radius: 10px;
+}
+
+.widget-dnd > switch:checked slider {
+  background: @white;
+}
+
+/* ── Widget: buttons-grid (wifi / bluetooth / mic / lock) ──────────────── */
+.widget-buttons-grid {
+  background: transparent;
+  margin: 4px;
+  padding: 0;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild {
+  background: transparent;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button {
+  background: @background-hover;
+  color: @text;
+  border: 1px solid @border;
+  border-radius: 4px;
+  padding: 6px 14px;
+  font-size: 14px;
+  transition: all 150ms ease;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:hover {
+  background: @background-active;
+  color: @text-hover;
+}
+
+/* Active toggles (wifi on, bluetooth on, mic live) */
+.widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked {
+  background: @active;
+  color: @white;
+  border: 1px solid @active;
+}
+
+/* ── Widget: volume + backlight sliders ────────────────────────────────── */
+.widget-volume,
+.widget-backlight {
+  background: transparent;
+  color: @text;
+  margin: 4px;
+  padding: 2px 6px;
+}
+
+.widget-volume scale trough,
+.widget-backlight scale trough {
+  background: @background-hover;
+  border: 1px solid @border;
+  border-radius: 4px;
+  min-height: 8px;
+}
+
+.widget-volume scale highlight,
+.widget-backlight scale highlight {
+  background: @active;
+  border-radius: 4px;
+}
+
+.widget-volume scale slider,
+.widget-backlight scale slider {
+  background: @white;
+  border-radius: 8px;
+}
+
+/* Per-app volume reveal */
+.widget-volume > box > button {
+  background: transparent;
+  color: @text;
+  border: none;
+}
+
+.widget-volume > box > button:hover {
+  color: @text-hover;
+}
+
+.per-app-volume {
+  background: @background-hover;
+  border-radius: 4px;
+  margin: 0 4px 4px 4px;
+  padding: 4px;
+}
+
+/* ── Widget: mpris (media controls) ────────────────────────────────────── */
+.widget-mpris {
+  background: transparent;
+  margin: 4px;
+}
+
+.widget-mpris-player {
+  background: @background-hover;
+  border: 1px solid @border;
+  border-radius: 8px;
+  color: @text;
+  padding: 8px;
+  margin: 4px;
+}
+
+.widget-mpris-title {
+  color: @white;
+  font-weight: 500;
+}
+
+.widget-mpris-subtitle {
+  color: @text-inactive;
+}
+
+.widget-mpris button {
+  background: transparent;
+  color: @text;
+  border-radius: 4px;
+}
+
+.widget-mpris button:hover {
+  background: @background-active;
+  color: @text-hover;
 }

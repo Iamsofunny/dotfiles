@@ -57,7 +57,7 @@ tooltip label {
   border-radius: 3px;
 }
 
-#qorkspaces button.empty {
+#workspaces button.empty {
   border: 1px solid @border;
 }
 
@@ -111,12 +111,19 @@ tooltip label {
 }
 
 #cpu,
-#custom-launcher,
 #idle_inhibitor,
 #network.wifi,
 #network.ethernet,
 #network.disconnected {
   padding: 0px 14px 0px 10px;
+}
+
+/* ── CPU ────────────────────────────────────────────────────────────────── */
+#cpu.warning {
+  color: @warning;
+}
+#cpu.critical {
+  color: @urgent;
 }
 
 /* ── Network ─────────────────────────────────────────────────────────────── */
@@ -160,6 +167,11 @@ tooltip label {
 #battery.critical:not(.charging) {
   color: @urgent;
   animation: blink 1s ease-in-out infinite alternate;
+}
+
+@keyframes blink {
+  from { opacity: 1; }
+  to   { opacity: 0.4; }
 }
 
 /* ── Idle Inhibitor (block sleep) ─────────────────────────────────────── */
@@ -215,8 +227,4 @@ menu menuitem {
 menu menuitem:hover {
   background: @background-hover;
   color: @text-hover;
-}
-menu separator {
-  background: @border;
-  margin: 4px 2px;
 }

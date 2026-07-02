@@ -26,10 +26,14 @@
 
   users.users.matze = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" ];
+    extraGroups = [ "wheel" "networkmanager" "video" "docker" ];
     shell = pkgs.fish;
   };
   programs.fish.enable = true;
+
+  services.tailscale.enable = true;
+
+  virtualisation.docker.enable = true;
 
   # Waybar's bluetooth module needs BlueZ running.
   hardware.bluetooth.enable = true;
@@ -43,7 +47,7 @@
     pulse.enable = true;
   };
 
-  # obsidian is unfree.
+  # obsidian and vscode are unfree.
   nixpkgs.config.allowUnfree = true;
 
   # Applications referenced by binds/rules in niri/.config/niri/config.kdl
@@ -54,10 +58,12 @@
     nautilus
     obsidian
     keepassxc
+    vscode
     brightnessctl
     playerctl
     pasystray
     pulseaudio # pactl, used by the Waybar pulseaudio on-click
+    pavucontrol # Waybar pulseaudio on-click-right
   ];
 
   # Waybar / fuzzel styling expects this font.
