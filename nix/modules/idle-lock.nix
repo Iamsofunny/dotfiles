@@ -15,7 +15,12 @@
 
 {
   # PAM entry — without this, swaylock cannot authenticate the unlock.
-  programs.swaylock.enable = true;
+  # (programs.swaylock only exists in home-manager, not NixOS.)
+  security.pam.services.swaylock = { };
+
+  # swayidle invokes swaylock from the systemd user PATH
+  # (/run/current-system/sw/bin), so it must be a system package.
+  environment.systemPackages = [ pkgs.swaylock ];
 
   services.logind.settings.Login.HandleLidSwitch = "suspend";
 

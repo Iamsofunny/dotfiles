@@ -59,6 +59,8 @@
     obsidian
     keepassxc
     vscode
+    notepad-next
+    libreoffice
     brightnessctl
     playerctl
     pasystray
