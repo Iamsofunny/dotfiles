@@ -183,7 +183,7 @@
     "menu-file": "$HOME/.config/waybar/power_menu.xml",
     "menu-actions": {
       // lock goes through loginctl so swayidle's `lock` handler
-      // (swaylock -f) stays the single brain.
+      // (gtklock --daemonize) stays the single brain.
       "lock": "loginctl lock-session",
       "suspend": "systemctl suspend",
       "logout": "niri msg action quit --skip-confirmation",

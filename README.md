@@ -15,7 +15,7 @@ that builds a Niri Wayland desktop for a single laptop
     niri `config.kdl`, waybar `config.jsonc`/`style.css`/`colors.css`,
     swaync `style.css`
   - **Set-and-forget** (committed store symlinks, rebuild to change):
-    swayidle, swaylock, swaync `config.json`, fuzzel
+    swayidle, gtklock, swaync `config.json`, fuzzel
 
 ## Deploying on the laptop
 
@@ -43,5 +43,5 @@ Daemons run as systemd user services bound to `graphical-session.target`:
   real machine (step 2 above).
 - swayidle timeouts (300/360 s) are starter values — tune them in
   `swayidle/.config/swayidle/config`.
-- swaync `style.css`/`config.json`, swaylock `config`, and `fuzzel.ini` are
-  minimal placeholders — paste in your real ones anytime.
+- swaync `style.css`/`config.json` and `fuzzel.ini` are minimal
+  placeholders — paste in your real ones anytime.

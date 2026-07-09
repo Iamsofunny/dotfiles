@@ -1,5 +1,5 @@
 {
-  description = "NixOS laptop — Niri Wayland desktop (greetd + waybar + swaync + swayidle/swaylock + fuzzel)";
+  description = "NixOS laptop — Niri Wayland desktop (greetd + waybar + swaync + swayidle/gtklock + fuzzel)";
 
   inputs = {
     # nixos-unstable: Niri/swaync move fast, recent packages required.

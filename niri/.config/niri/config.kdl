@@ -54,7 +54,7 @@ binds {
     // Programme.
     Mod+Return hotkey-overlay-title="Open a Terminal: kitty" 		{ spawn "kitty"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" 	{ spawn "fuzzel"; }
-    Super+L hotkey-overlay-title="Lock the Screen: swaylock" 	{ spawn "swaylock" "-f"; }
+    Super+L hotkey-overlay-title="Lock the Screen: gtklock" 	{ spawn "gtklock" "--daemonize"; }
     Mod+B { spawn "firefox"; }
     Mod+E { spawn "nautilus"; }
     Mod+O { spawn "obsidian"; }

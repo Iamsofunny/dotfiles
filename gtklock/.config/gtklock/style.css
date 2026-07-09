@@ -1,0 +1,91 @@
+/* gtklock — dark look matching Waybar.
+   Palette copied from waybar/.config/waybar/colors.css — keep in sync
+   (gtklock only loads this one file, it can't @import across ~/.config).
+   Committed / read-only (set-and-forget): changes need a nixos-rebuild
+   switch.
+
+   Widget names come from gtklock's built-in layout (res/gtklock.ui):
+   #clock-label, #date-label, #input-label, #input-field, #unlock-button,
+   #error-label, #warning-label. The focused output's window carries a
+   .focused class, and .hidden while the input form is hidden. */
+
+@define-color background #0f1117;
+@define-color background-hover #121824;
+@define-color border #1a2030;
+@define-color active #1a6fd4;
+@define-color urgent #ff5555;
+@define-color warning #f0a030;
+@define-color text #9aaec8;
+@define-color text-active #4a9eff;
+@define-color white #ffffff;
+
+* {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+}
+
+window {
+  background-color: @background;
+  color: @text;
+}
+
+/* Big clock on idle outputs, compact above the password form
+   (overrides gtklock's built-in 96pt/32pt sizing). */
+window #clock-label {
+  font-size: 72pt;
+  font-weight: 300;
+  color: @white;
+}
+window.focused:not(.hidden) #clock-label {
+  font-size: 26pt;
+  font-weight: 500;
+}
+
+#date-label {
+  color: @text;
+  font-size: 12pt;
+}
+
+#input-label {
+  color: @text;
+}
+
+/* Password box — the dots and the reveal-eye icon are GtkEntry built-ins. */
+#input-field {
+  background-color: @background-hover;
+  background-image: none;
+  color: @white;
+  caret-color: @white;
+  border: 1px solid @border;
+  border-radius: 3px;
+  box-shadow: none;
+  padding: 6px 10px;
+}
+#input-field:focus {
+  border-color: @active;
+}
+#input-field selection {
+  background-color: @active;
+  color: @white;
+}
+
+#unlock-button {
+  background-color: @active;
+  background-image: none;
+  color: @white;
+  border: none;
+  border-radius: 3px;
+  box-shadow: none;
+  text-shadow: none;
+  padding: 4px 14px;
+}
+#unlock-button:hover {
+  background-color: @text-active;
+}
+
+/* PAM feedback: wrong password / caps lock. */
+#error-label {
+  color: @urgent;
+}
+#warning-label {
+  color: @warning;
+}
