@@ -7,7 +7,9 @@ that builds a Niri Wayland desktop for a single laptop
 ## Layout
 
 - `nix/flake.nix` — inputs: nixos-unstable, home-manager (as NixOS module), niri-flake
-- `nix/hosts/laptop/` — host config + `hardware-configuration.nix` **placeholder**
+- `nix/hosts/common.nix` — everything shared between hosts
+- `nix/hosts/laptop/` (systemd-boot) and `nix/hosts/vm/` (GRUB, BIOS) —
+  bootloader + hostname + `hardware-configuration.nix` **placeholder** each
 - `nix/modules/` — one module per settled subtree (greetd, niri, portals, waybar,
   swaync, idle/lock, fuzzel, env, HM wiring)
 - `<app>/.config/<app>/…` — the verbatim configs ("Option A", no Nix rewrite):
@@ -26,6 +28,10 @@ that builds a Niri Wayland desktop for a single laptop
 2. Replace the placeholder hardware config:
    `sudo nixos-generate-config --show-hardware-config > nix/hosts/laptop/hardware-configuration.nix`
 3. `sudo nixos-rebuild switch --flake ~/dotfiles/nix#laptop`
+
+Same for the VM with `hosts/vm/hardware-configuration.nix` and `#vm`
+(GRUB on `/dev/vda` — adjust `boot.loader.grub.device` in
+`nix/hosts/vm/default.nix` if the virtual disk isn't virtio).
 
 No config.kdl edits are needed per machine: the Fedora-only starters
 (`launch-waybar`, swaync) no-op on NixOS via an `/etc/NIXOS` guard.
