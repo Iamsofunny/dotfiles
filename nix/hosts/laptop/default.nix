@@ -67,6 +67,8 @@
   # Applications referenced by binds/rules in niri/.config/niri/config.kdl
   # and by the Waybar config.
   environment.systemPackages = with pkgs; [
+    git # also required for flake rebuilds from ~/dotfiles
+    htop
     kitty
     firefox
     nautilus
