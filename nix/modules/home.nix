@@ -41,6 +41,12 @@
         # mkForce guards against HM's swaync module also claiming style.css.
         xdg.configFile."swaync/style.css" =
           lib.mkForce { source = link "swaync/.config/swaync/style.css"; };
+
+        # Whole-directory links (stow parity). fish rewrites fish_variables
+        # in place, so the directory must stay writable — those writes land
+        # in the repo checkout, exactly as with stow on Fedora.
+        xdg.configFile."fish".source = link "fish/.config/fish";
+        xdg.configFile."kitty".source = link "kitty/.config/kitty";
       };
   };
 }

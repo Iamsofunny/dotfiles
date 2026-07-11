@@ -182,9 +182,11 @@
     "menu": "on-click",
     "menu-file": "$HOME/.config/waybar/power_menu.xml",
     "menu-actions": {
-      // lock goes through loginctl so swayidle's `lock` handler
-      // (gtklock --daemonize) stays the single brain.
-      "lock": "loginctl lock-session",
+      // lock spawns gtklock directly, same as the Super+L bind and the
+      // swayidle handlers. `loginctl lock-session` doesn't work here: on
+      // NixOS waybar is a systemd user service outside the login session,
+      // so logind can't resolve which session to lock and does nothing.
+      "lock": "gtklock --daemonize",
       "suspend": "systemctl suspend",
       "logout": "niri msg action quit --skip-confirmation",
       "reboot": "systemctl reboot",

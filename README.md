@@ -19,14 +19,16 @@ that builds a Niri Wayland desktop for a single laptop
 
 ## Deploying on the laptop
 
-1. Clone this repo to `~/dotfiles` (if elsewhere, adjust `repo` in
-   `nix/modules/home.nix`).
+1. Clone this repo to `~/dotfiles` — **required**, the hot-reload configs
+   (niri, waybar, fish, kitty, swaync style) are out-of-store symlinks into
+   this exact path; without it they dangle and the apps fall back to their
+   defaults. If cloned elsewhere, adjust `repo` in `nix/modules/home.nix`.
 2. Replace the placeholder hardware config:
    `sudo nixos-generate-config --show-hardware-config > nix/hosts/laptop/hardware-configuration.nix`
-3. In `niri/.config/niri/config.kdl`, delete the `spawn-at-startup "waybar"`
-   line — on NixOS waybar runs as a systemd user service (it stays for the
-   old stow-based setup).
-4. `sudo nixos-rebuild switch --flake ~/dotfiles/nix#laptop`
+3. `sudo nixos-rebuild switch --flake ~/dotfiles/nix#laptop`
+
+No config.kdl edits are needed per machine: the Fedora-only starters
+(`launch-waybar`, swaync) no-op on NixOS via an `/etc/NIXOS` guard.
 
 The flake sits in a subdirectory of the git repo, so its references to the
 config files at the repo root (`../../swaync/…` etc.) work — but only for

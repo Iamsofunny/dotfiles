@@ -19,10 +19,24 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # Binary cache for niri-unstable (values from the niri-flake README) —
+  # without it the rebuild compiles niri from source.
+  nix.settings.substituters = [ "https://niri.cachix.org" ];
+  nix.settings.trusted-public-keys =
+    [ "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964=" ];
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   time.timeZone = "Europe/Berlin";
+
+  # German locale + keyboard. console.keyMap covers the VT (tuigreet login);
+  # XKB_DEFAULT_LAYOUT covers niri, whose bare `xkb {}` block falls back to
+  # libxkbcommon's environment defaults — config.kdl stays layout-free so the
+  # Fedora stow setup keeps its own layout.
+  i18n.defaultLocale = "de_DE.UTF-8";
+  console.keyMap = "de";
+  environment.sessionVariables.XKB_DEFAULT_LAYOUT = "de";
 
   users.users.matze = {
     isNormalUser = true;

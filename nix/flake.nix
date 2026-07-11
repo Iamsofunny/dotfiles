@@ -23,6 +23,9 @@
       modules = [
         home-manager.nixosModules.home-manager
         niri.nixosModules.niri
+        # Exposes pkgs.niri-unstable (git master), selected in
+        # modules/niri.nix — the verbatim config.kdl uses master features.
+        { nixpkgs.overlays = [ niri.overlays.niri ]; }
         ./hosts/laptop
       ];
     };

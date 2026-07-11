@@ -228,12 +228,12 @@ layout {
     struts 
 }
 
-// NixOS: DELETE the waybar line below — waybar runs as a systemd user
-// service there (nix/modules/waybar.nix); spawning it here too starts two bars.
-// spawn-at-startup "waybar"
+// Fedora (stow) starters. On NixOS waybar/swaync run as systemd user
+// services instead: launch-waybar exits by itself when /etc/NIXOS exists,
+// and the swaync spawn is guarded the same way below.
 spawn-at-startup "/home/matze/.config/waybar/launch-waybar"
 spawn-at-startup "pasystray"
-spawn-at-startup "swaync"
+spawn-at-startup "sh" "-c" "[ -e /etc/NIXOS ] || exec swaync"
 
 prefer-no-csd
 

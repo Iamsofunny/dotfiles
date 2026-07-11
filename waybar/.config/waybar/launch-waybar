@@ -1,4 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+# On NixOS waybar runs as a systemd user service (nix/modules/waybar.nix);
+# bail out so this script can never start a second bar there.
+[ -e /etc/NIXOS ] && exit 0
 
 CONFIG_FILES="$HOME/.config/waybar/config.jsonc $HOME/.config/waybar/style.css"
 
