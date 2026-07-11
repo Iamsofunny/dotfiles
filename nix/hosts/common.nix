@@ -66,6 +66,12 @@
   environment.systemPackages = with pkgs; [
     git # also required for flake rebuilds from ~/dotfiles
     htop
+    # The fish config (fish/.config/fish) shells out to these:
+    # zoxide init in config.fish; cat/ls/e aliased to bat/lsd/micro.
+    zoxide
+    bat
+    lsd
+    micro
     kitty
     firefox
     nautilus

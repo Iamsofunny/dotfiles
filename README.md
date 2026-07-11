@@ -30,7 +30,7 @@ that builds a Niri Wayland desktop for a single laptop
 3. `sudo nixos-rebuild switch --flake ~/dotfiles/nix#laptop`
 
 Same for the VM with `hosts/vm/hardware-configuration.nix` and `#vm`
-(GRUB on `/dev/vda` — adjust `boot.loader.grub.device` in
+(GRUB on `/dev/sda` — adjust `boot.loader.grub.device` in
 `nix/hosts/vm/default.nix` if the virtual disk isn't virtio).
 
 No config.kdl edits are needed per machine: the Fedora-only starters
