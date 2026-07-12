@@ -73,6 +73,7 @@
   # and by the Waybar config.
   environment.systemPackages = with pkgs; [
     git # also required for flake rebuilds from ~/dotfiles
+    adwaita-icon-theme # symbolic icons for GTK apps (gtklock eye, swaync)
     htop
     # The fish config (fish/.config/fish) shells out to these:
     # zoxide init in config.fish; cat/ls/e aliased to bat/lsd/micro.
