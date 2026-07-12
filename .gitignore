@@ -1,0 +1,3 @@
+# fish rewrites this in place (the fish dir is a writable out-of-store
+# symlink, see nix/modules/home.nix) — machine state, not config.
+fish/.config/fish/fish_variables
