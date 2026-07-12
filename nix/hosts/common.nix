@@ -35,11 +35,11 @@
 
   time.timeZone = "Europe/Berlin";
 
-  # German locale + keyboard. console.keyMap covers the VT (tuigreet login);
-  # XKB_DEFAULT_LAYOUT covers niri, whose bare `xkb {}` block falls back to
-  # libxkbcommon's environment defaults — config.kdl stays layout-free so the
-  # Fedora stow setup keeps its own layout.
-  i18n.defaultLocale = "de_DE.UTF-8";
+  # English language, German keyboard. console.keyMap covers the VT (tuigreet
+  # login); XKB_DEFAULT_LAYOUT covers niri, whose bare `xkb {}` block falls
+  # back to libxkbcommon's environment defaults — config.kdl stays layout-free
+  # so the Fedora stow setup keeps its own layout.
+  i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "de";
   environment.sessionVariables.XKB_DEFAULT_LAYOUT = "de";
 
