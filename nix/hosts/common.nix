@@ -25,6 +25,14 @@
   nix.settings.trusted-public-keys =
     [ "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964=" ];
 
+  # Unstable channel churns fast — GC weekly so old generations don't
+  # fill the disk.
+  nix.gc.automatic = true;
+  nix.gc.options = "--delete-older-than 7d";
+
+  services.fstrim.enable = true; # SSD trim timer
+  zramSwap.enable = true; # compressed RAM swap, no swap partition needed
+
   time.timeZone = "Europe/Berlin";
 
   # German locale + keyboard. console.keyMap covers the VT (tuigreet login);
@@ -94,6 +102,11 @@
   ];
 
   services.printing.enable = true;
+
+  # USB sticks: unprivileged mounting + Nautilus integration
+  # (click-to-mount under /run/media, or `udisksctl mount -b ...`).
+  services.udisks2.enable = true;
+  services.gvfs.enable = true;
 
   # Waybar / fuzzel styling expects this font.
   fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
