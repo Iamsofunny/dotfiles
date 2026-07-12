@@ -85,7 +85,15 @@
     pasystray
     pulseaudio # pactl, used by the Waybar pulseaudio on-click
     pavucontrol # Waybar pulseaudio on-click-right
+    unzip
+    zip
+    evince
+    loupe
+    gcc
+    python3
   ];
+
+  services.printing.enable = true;
 
   # Waybar / fuzzel styling expects this font.
   fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
