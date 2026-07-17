@@ -21,6 +21,15 @@ that builds a Niri Wayland desktop for a single laptop
 
 ## Deploying on the laptop
 
+One-liner on a fresh, already-running NixOS box (clone → hardware config →
+rebuild `#laptop`, handling the git/flakes bootstrap gaps):
+
+```
+curl -sSL https://raw.githubusercontent.com/Iamsofunny/dotfiles/main/install.sh | bash
+```
+
+Or do it by hand:
+
 1. Clone this repo to `~/dotfiles` — **required**, the hot-reload configs
    (niri, waybar, fish, kitty, swaync style) are out-of-store symlinks into
    this exact path; without it they dangle and the apps fall back to their
