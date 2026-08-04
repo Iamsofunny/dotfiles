@@ -1,6 +1,6 @@
 # Shared host config — everything except bootloader, hostname and
 # hardware-configuration.nix, which stay in hosts/<name>/default.nix.
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   imports = [
@@ -13,6 +13,7 @@
     ../modules/swaync.nix
     ../modules/idle-lock.nix
     ../modules/fuzzel.nix
+    ../modules/theme.nix
   ];
 
   networking.networkmanager.enable = true;
@@ -51,11 +52,15 @@
   programs.fish.enable = true;
 
   services.tailscale.enable = true;
+  #networking.checkReversePath = "loose";
+  networking.firewall.trustedInterfaces = [ "tailscale0" ];
+  networking.firewall.allowedUDPPorts = [ config.services.tailscale.port ];
 
   virtualisation.docker.enable = true;
 
   # Waybar's bluetooth module needs BlueZ running.
   hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
   # PipeWire is required by xdg-desktop-portal-wlr for screencast
   # (see nix/modules/portals.nix), and provides audio (wpctl binds in
@@ -92,7 +97,6 @@
     libreoffice
     brightnessctl
     playerctl
-    pasystray
     pulseaudio # pactl, used by the Waybar pulseaudio on-click
     pavucontrol # Waybar pulseaudio on-click-right
     unzip
@@ -101,6 +105,10 @@
     loupe
     gcc
     python3
+    claude-code
+    rclone
+    nirimod
+    syncthing
   ];
 
   services.printing.enable = true;
@@ -111,7 +119,7 @@
   services.gvfs.enable = true;
 
   # Waybar / fuzzel styling expects this font.
-  fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
+  fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono pkgs.noto-fonts ];
 
   # Set to the release you first install with; do not bump afterwards.
   system.stateVersion = "25.11";

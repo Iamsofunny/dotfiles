@@ -15,18 +15,25 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # GTK4 GUI config editor for niri; not packaged in nixpkgs.
+    nirimod = {
+      url = "github:srinivasr/nirimod";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, niri, ... }:
+  outputs = { self, nixpkgs, home-manager, niri, nirimod, ... }:
     let
       mkHost = host: nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           home-manager.nixosModules.home-manager
           niri.nixosModules.niri
-          # Exposes pkgs.niri-unstable (git master), selected in
-          # modules/niri.nix — the verbatim config.kdl uses master features.
-          { nixpkgs.overlays = [ niri.overlays.niri ]; }
+          # niri.overlays.niri exposes pkgs.niri-unstable (git master),
+          # selected in modules/niri.nix — the verbatim config.kdl uses
+          # master features. nirimod.overlays.default exposes pkgs.nirimod.
+          { nixpkgs.overlays = [ niri.overlays.niri nirimod.overlays.default ]; }
           host
         ];
       };

@@ -4,7 +4,9 @@ input {
     focus-follows-mouse max-scroll-amount="33%"
 
     keyboard {
-        xkb
+        xkb {
+        	layout "de"
+        }
         numlock
     }
 
@@ -48,6 +50,11 @@ environment {
     QT_QPA_PLATFORM "wayland"
     XCURSOR_THEME "Adwaita"
     XCURSOR_SIZE "24"
+}
+
+cursor {
+    xcursor-theme "Adwaita"
+    xcursor-size 24
 }
 
 binds {
@@ -232,7 +239,6 @@ layout {
 // services instead: launch-waybar exits by itself when /etc/NIXOS exists,
 // and the swaync spawn is guarded the same way below.
 spawn-at-startup "/home/matze/.config/waybar/launch-waybar"
-spawn-at-startup "pasystray"
 spawn-at-startup "sh" "-c" "[ -e /etc/NIXOS ] || exec swaync"
 
 prefer-no-csd
