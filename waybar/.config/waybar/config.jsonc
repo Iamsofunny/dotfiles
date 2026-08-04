@@ -86,7 +86,8 @@
     "tooltip-format-ethernet": "{ifname}\n{ipaddr}/{cidr}",
     "tooltip-format-disconnected": "Disconnected",
     // nmtui ships with NetworkManager, so this works without extra packages
-    "on-click": "kitty --title nmtui -e nmtui",
+    // "on-click": "kitty --title nmtui -e nmtui",
+    "on-click": "nm-connection-editor",
     "interval": 5
   },
 

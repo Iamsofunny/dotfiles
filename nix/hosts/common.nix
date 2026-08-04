@@ -16,8 +16,6 @@
     ../modules/theme.nix
   ];
 
-  networking.networkmanager.enable = true;
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Binary cache for niri-unstable (values from the niri-flake README) —
@@ -51,10 +49,18 @@
   };
   programs.fish.enable = true;
 
-  services.tailscale.enable = true;
-  #networking.checkReversePath = "loose";
+
+  networking.networkmanager = {
+    enable = true;
+    plugins = with pkgs; [ networkmanager-openconnect ];
+  };
   networking.firewall.trustedInterfaces = [ "tailscale0" ];
   networking.firewall.allowedUDPPorts = [ config.services.tailscale.port ];
+  services.tailscale.enable = true;
+
+  services.gnome.gnome-keyring.enable = true;
+  security.polkit.enable = true;
+  
 
   virtualisation.docker.enable = true;
 
@@ -109,6 +115,11 @@
     rclone
     nirimod
     syncthing
+    swaybg
+    thunderbird
+    openconnect
+    networkmanagerapplet
+    gnome-keyring
   ];
 
   services.printing.enable = true;
