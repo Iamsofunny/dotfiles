@@ -15,9 +15,6 @@
 
     users.matze = { config, ... }:
       let
-        # Absolute path to this repo's checkout on the machine.
-        # ADJUST if you clone it somewhere other than ~/dotfiles.
-        # The repo uses a stow-style layout: <app>/.config/<app>/<file>.
         repo = "${config.home.homeDirectory}/dotfiles";
         link = path:
           config.lib.file.mkOutOfStoreSymlink "${repo}/${path}";
@@ -29,24 +26,13 @@
         xdg.configFile."niri/config.kdl" =
           lib.mkForce { source = link "niri/.config/niri/config.kdl"; };
 
-        xdg.configFile."waybar/config.jsonc".source =
-          link "waybar/.config/waybar/config.jsonc";
-        xdg.configFile."waybar/style.css".source =
-          link "waybar/.config/waybar/style.css";
-        xdg.configFile."waybar/colors.css".source =
-          link "waybar/.config/waybar/colors.css";
-        xdg.configFile."waybar/power_menu.xml".source =
-          link "waybar/.config/waybar/power_menu.xml";
-
         # mkForce guards against HM's swaync module also claiming style.css.
         xdg.configFile."swaync/style.css" =
           lib.mkForce { source = link "swaync/.config/swaync/style.css"; };
 
-        # Whole-directory links (stow parity). fish rewrites fish_variables
-        # in place, so the directory must stay writable — those writes land
-        # in the repo checkout, exactly as with stow on Fedora.
         xdg.configFile."fish".source = link "fish/.config/fish";
         xdg.configFile."kitty".source = link "kitty/.config/kitty";
+        xdg.configFile."waybar".source = link "waybar/.config/waybar";
       };
   };
 }

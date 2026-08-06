@@ -19,15 +19,16 @@
   ],
 
   "modules-right": [
-    "cpu",
+    // "cpu",
+    "custom/cpu",
     "network",
     "pulseaudio",
     "bluetooth",
     "backlight",
+    "tray",
+    "custom/notification",
     "battery",
     "idle_inhibitor",
-    "custom/notification",
-    "tray",
     "custom/power"
   ],
 
@@ -66,15 +67,23 @@
   },
 
   // ── Right ──────────────────────────────────────────────────────────────────
-  "cpu": {
-    "interval": 1,
-    "format": "{icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}{icon8}{icon9}{icon10}{icon11}{icon12}{icon13}{icon14}{icon15} {usage}% ",
-    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
-    // CSS classes for recoloring under load (see style.css #cpu.warning/.critical)
-    "states": {
-      "warning": 70,
-      "critical": 90
-    }
+  // "cpu": {
+  //   "interval": 1,
+  //   "format": "{icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}{icon8}{icon9}{icon10}{icon11}{icon12}{icon13}{icon14}{icon15} {usage}% ",
+  //   "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+  //   // CSS classes for recoloring under load (see style.css #cpu.warning/.critical)
+  //   "states": {
+  //     "warning": 70,
+  //     "critical": 90
+  //   }
+  // },
+
+  "custom/cpu": {
+      "format": "{}",
+      "return-type": "json",
+      "interval": 5,
+      "exec": "~/.config/waybar/scripts/waybar-cpu.py",
+      "on-click": "kitty -e btop"
   },
 
   "network": {
