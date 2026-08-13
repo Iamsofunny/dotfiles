@@ -17,7 +17,10 @@ that builds a Niri Wayland desktop for a single laptop
     niri `config.kdl`, waybar `config.jsonc`/`style.css`/`colors.css`,
     swaync `style.css`
   - **Set-and-forget** (committed store symlinks, rebuild to change):
-    swayidle, gtklock, swaync `config.json`, fuzzel
+    gtklock, swaync `config.json`, fuzzel
+
+  swayidle has no config file: its timeouts and events are Nix options in
+  `nix/modules/idle-lock.nix`, so every command it runs is a store path.
 
 ## Deploying on the laptop
 
@@ -59,6 +62,6 @@ Daemons run as systemd user services bound to `graphical-session.target`:
 - `hosts/laptop/hardware-configuration.nix` is a stub — must come from the
   real machine (step 2 above).
 - swayidle timeouts (300/360 s) are starter values — tune them in
-  `swayidle/.config/swayidle/config`.
+  `nix/modules/idle-lock.nix`.
 - swaync `style.css`/`config.json` and `fuzzel.ini` are minimal
   placeholders — paste in your real ones anytime.
