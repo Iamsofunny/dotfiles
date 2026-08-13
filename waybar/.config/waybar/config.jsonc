@@ -6,8 +6,6 @@
   "margin-top": 0,
   "margin-bottom": 0,
   "exclusive": true,
-  // Pick up style.css/colors.css edits live — pairs with the
-  // out-of-store symlink workflow (no restart needed).
   "reload_style_on_change": true,
 
   "modules-left": [
@@ -23,7 +21,7 @@
     "custom/cpu",
     "network",
     "pulseaudio",
-    "bluetooth",
+    // "bluetooth",
     "backlight",
     "tray",
     "custom/notification",
@@ -44,7 +42,7 @@
   // ── Center ─────────────────────────────────────────────────────────────────
 
   "clock": {
-    "format": "󰥔 {:%H:%M 󰃮 %B %d, %Y}",
+    "format": "󰥔 {:%H:%M  󰃮 %d/%m/%Y}",
     "format-alt": "󰥔 {:%H:%M}",
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
     "calendar": {

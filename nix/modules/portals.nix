@@ -1,15 +1,3 @@
-# Portals: gtk as default, wlr for screencast/screenshot.
-#
-# wlr is required because the gtk portal cannot do screen capture on
-# wlroots-style compositors. The `config.niri` attrset below is rendered to
-# niri-portals.conf, and only loads when XDG_CURRENT_DESKTOP=niri — which
-# niri-session sets (see nix/modules/env.nix).
-#
-# mkForce: niri-flake pulls in / configures the GNOME portal by default;
-# we suppress it entirely rather than double-enable.
-#
-# Note: xdg-desktop-portal-wlr needs PipeWire for screencast — enabled in
-# hosts/laptop/default.nix.
 { pkgs, lib, ... }:
 
 {

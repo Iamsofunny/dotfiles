@@ -58,6 +58,11 @@
 
   ## Printing
   services.printing.enable = true;
+  services.avahi = { # discovery of network printers over mDNS/DNS-SD
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
 
   ## USB mounting
   services.udisks2.enable = true;
@@ -134,7 +139,9 @@
     nirimod
     notepad-next
     obsidian
+    obs-studio
     thunderbird # Mail client
+    vlc # Media Player
     vscode
   ];
 }
