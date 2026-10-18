@@ -7,7 +7,7 @@ if test -e /etc/NIXOS
     # Activate without a boot entry — reverts on reboot, good for trying things
     alias nrt="sudo nixos-rebuild test --flake ~/dotfiles/nix#(hostname)"
     # Update flake inputs (nixpkgs, home-manager, niri)
-    alias nup="nix flake update --flake ~/dotfiles/nix"
+    alias nup="sudo nix flake update --flake ~/dotfiles/nix"
     # Free space: drop generations older than a week, dedupe the store
     alias ngc="sudo nix-collect-garbage --delete-older-than 7d && sudo nix store optimise"
     # List system generations (what nrs/rollback switch between)

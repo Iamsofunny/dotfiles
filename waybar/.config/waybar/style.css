@@ -167,7 +167,7 @@ tooltip label {
 }
 #battery.critical:not(.charging) {
   color: @urgent;
-  animation: blink 1s ease-in-out infinite alternate;
+  /* animation: blink 1s ease-in-out infinite alternate; */
 }
 
 @keyframes blink {

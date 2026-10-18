@@ -238,6 +238,7 @@ spawn-at-startup "/home/matze/.config/waybar/launch-waybar"
 spawn-at-startup "sh" "-c" "[ -e /etc/NIXOS ] || exec swaync"
 spawn-at-startup "swaybg" "-i" "/home/matze/Pictures/wall.png" "-m" "fill"
 spawn-at-startup "nm-applet"
+spawn-at-startup "tailscale" "systray"
 
 prefer-no-csd
 

@@ -127,9 +127,12 @@
     git
     (python3.withPackages (python-pkgs: with python-pkgs; [
       psutil
+      dbus-python
     ]))
 
     # Software
+    chromium
+    discord
     evince # Document viewer
     firefox
     keepassxc
