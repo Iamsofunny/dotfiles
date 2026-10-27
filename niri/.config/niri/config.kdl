@@ -296,3 +296,6 @@ recent-windows {
         Alt+Shift+Tab   { previous-window; }
     }
 }
+hotkey-overlay {
+    skip-at-startup
+}

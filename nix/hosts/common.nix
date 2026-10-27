@@ -12,6 +12,7 @@
     ../modules/niri.nix
     ../modules/portals.nix
     ../modules/swaync.nix
+    ../modules/syncthing.nix
     ../modules/theme.nix
     ../modules/waybar.nix
   ];
@@ -114,6 +115,7 @@
     btop # System Overview
     claude-code
     lsd # ls replacement
+    metasploit # CTF Tool
     micro # Editor
     openconnect # VPN client
     rclone
@@ -135,6 +137,7 @@
     discord
     evince # Document viewer
     firefox
+    gimp
     keepassxc
     libreoffice
     loupe # Image viewer
