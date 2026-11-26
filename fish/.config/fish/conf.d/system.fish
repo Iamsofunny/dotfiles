@@ -1,7 +1,7 @@
 # Package Management
-alias update="sudo dnf upgrade --refresh"
-alias psearch="dnf search"
-alias pinstall="sudo dnf install"
+#alias update="sudo dnf upgrade --refresh"
+#alias psearch="dnf search"
+#alias pinstall="sudo dnf install"
 
 # Systemd / Bisync Services
 alias bisync-log="journalctl -u holemine-bisync.service -f"

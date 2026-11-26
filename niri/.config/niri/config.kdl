@@ -50,6 +50,7 @@ environment {
     QT_QPA_PLATFORM "wayland"
     XCURSOR_THEME "Adwaita"
     XCURSOR_SIZE "24"
+    DISPLAY ":12"
 }
 
 cursor {
@@ -156,8 +157,8 @@ binds {
 
     // Window Size Control
     // Width
-    Mod+R            { switch-preset-column-width; }
-    Mod+Shift+R      { switch-preset-column-width-back; }
+    Mod+Shift+R            { switch-preset-column-width; }
+    Mod+R      { switch-preset-column-width-back; }
     Mod+Minus        { set-column-width "-10%"; }
     Mod+Plus         { set-column-width "+10%"; }
     Mod+Ctrl+F       { expand-column-to-available-width; }
@@ -234,6 +235,7 @@ layout {
     struts 
 }
 
+spawn-at-startup "xwayland-satellite" ":12"
 spawn-at-startup "/home/matze/.config/waybar/launch-waybar"
 spawn-at-startup "sh" "-c" "[ -e /etc/NIXOS ] || exec swaync"
 spawn-at-startup "swaybg" "-i" "/home/matze/Pictures/wall.png" "-m" "fill"

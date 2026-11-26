@@ -12,4 +12,5 @@ alias hlp="cat ~/.help | more"
 alias db-start="docker compose -f /home/matze/Documents/Uni/Datenbanken\ Übung/db/compose.yml up -d"
 alias db-stop="docker compose -f /home/matze/Documents/Uni/Datenbanken\ Übung/db/compose.yml down"
 
-alias vpn-uni="sudo openconnect -u gd337@split.uni-heidelberg.de vpn-ac.uni-heidelberg.de"
+# alias vpn-uni="sudo openconnect -u gd337@split.uni-heidelberg.de vpn-ac.uni-heidelberg.de"
+alias vpn-uni="sudo openconnect -u gd337 vpn-ac.uni-heidelberg.de"

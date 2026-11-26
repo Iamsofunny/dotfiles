@@ -77,6 +77,7 @@
   };
   networking.firewall.trustedInterfaces = [ "tailscale0" ];
   networking.firewall.allowedUDPPorts = [ config.services.tailscale.port ];
+  services.resolved.enable = true;
 
 
   # User
@@ -85,6 +86,13 @@
     extraGroups = [ "wheel" "networkmanager" "video" "docker" ];
     shell = pkgs.fish;
   };
+
+
+  # VM
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "matze" ];
+  virtualisation.virtualbox.guest.enable = true;
+  virtualisation.virtualbox.guest.dragAndDrop = true;
 
 
   # Software
@@ -96,6 +104,7 @@
   environment.systemPackages = with pkgs; [
     # System
     gnome-keyring
+    xwayland-satellite
     ## Theme
     adwaita-icon-theme # symbolic icons for GTK apps
     ## Control
@@ -107,18 +116,23 @@
     ## Software
     swaybg # Wallpaper
     syncthing # File Syncing
+    ## Networking
+    dig
 
     # Shell
     kitty
     ## Programms
+    appimage-run # Appimmages zum laufen bringen
     bat # cat replacement
     btop # System Overview
     claude-code
+    jq # JSON processor
     lsd # ls replacement
     metasploit # CTF Tool
     micro # Editor
     openconnect # VPN client
     rclone
+    sshpass
     tealdeer # tldr
     unzip
     zip
@@ -127,6 +141,7 @@
     # Code
     gcc # C++ compiler
     git
+    nodejs
     (python3.withPackages (python-pkgs: with python-pkgs; [
       psutil
       dbus-python
@@ -137,6 +152,7 @@
     discord
     evince # Document viewer
     firefox
+    forge-mtg # MTG emulator
     gimp
     keepassxc
     libreoffice
@@ -146,8 +162,21 @@
     notepad-next
     obsidian
     obs-studio
+    pi-coding-agent
     thunderbird # Mail client
     vlc # Media Player
     vscode
+
+    # CTF
+    apache-directory-studio
+    dirsearch
+    masscan
+    nmap
+    openldap
+    openssl
+    openvpn
+    inetutils
+    samba
+    thc-hydra
   ];
 }
