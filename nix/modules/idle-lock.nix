@@ -1,37 +1,49 @@
-{ config, ... }:
+{ config, lib, pkgs, ... }:
 
 let
-  gtklock = "${config.programs.gtklock.package}/bin/gtklock --daemonize";
-  niri = "${config.programs.niri.package}/bin/niri";
+  hyprlock = lib.getExe pkgs.hyprlock;
+  pidof = lib.getExe' pkgs.procps "pidof";
+  niri = lib.getExe config.programs.niri.package;
 in
 {
-  programs.gtklock.enable = true;
+  # Required by Home Manager's programs.hyprlock so hyprlock can authenticate
+  # via PAM. We intentionally do NOT set NixOS `programs.hyprlock.enable`
+  # because nixpkgs's NixOS module enables NixOS `services.hypridle`, which
+  # pulls Hyprland into the closure.
+  security.pam.services.hyprlock = { };
 
   services.logind.settings.Login.HandleLidSwitch = "suspend";
 
   home-manager.sharedModules = [{
-    services.swayidle = {
+    # Installs pkgs.hyprlock; config is hot-reloaded via nix/modules/home.nix.
+    programs.hyprlock.enable = true;
+
+    services.hypridle = {
       enable = true;
 
-      timeouts = [
-        {
-          timeout = 300;
-          command = gtklock;
-        }
-        {
-          timeout = 360;
-          command = "${niri} msg action power-off-monitors";
-          resumeCommand = "${niri} msg action power-on-monitors";
-        }
-      ];
+      settings = {
+        general = {
+          lock_cmd = "${pidof} hyprlock || ${hyprlock}";
+          before_sleep_cmd = "${pidof} hyprlock || ${hyprlock} --immediate-render";
+          after_sleep_cmd = "${niri} msg action power-on-monitors";
+        };
 
-      events = {
-        before-sleep = gtklock;
-        lock = gtklock;
+        listener = [
+          {
+            timeout = 300;
+            on-timeout = "${pidof} hyprlock || ${hyprlock}";
+          }
+          {
+            timeout = 360;
+            on-timeout = "${niri} msg action power-off-monitors";
+            on-resume = "${niri} msg action power-on-monitors";
+          }
+        ];
       };
     };
 
-    xdg.configFile."gtklock/config.ini".source = ../../gtklock/.config/gtklock/config.ini;
-    xdg.configFile."gtklock/style.css".source = ../../gtklock/.config/gtklock/style.css;
+    # Keep an active hyprlock alive if hypridle restarts (e.g. during rebuild):
+    # killing a running ext-session-lock client leaves the compositor stuck locked.
+    systemd.user.services.hypridle.Service.KillMode = "process";
   }];
 }

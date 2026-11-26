@@ -62,7 +62,7 @@ binds {
     // Programme.
     Mod+Return hotkey-overlay-title="Open a Terminal: kitty" 		{ spawn "kitty"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" 	{ spawn "fuzzel"; }
-    Super+L hotkey-overlay-title="Lock the Screen: gtklock" 	{ spawn "gtklock" "--daemonize"; }
+    Super+L hotkey-overlay-title="Lock the Screen: hyprlock" 	{ spawn "hyprlock"; }
     Mod+B { spawn "firefox"; }
     Mod+E { spawn "nautilus"; }
     Mod+O { spawn "obsidian"; }
@@ -267,6 +267,16 @@ window-rule {
 window-rule {
     //geometry-corner-radius 12
     clip-to-geometry true
+}
+
+// Blur behind kitty (niri 26.04+); disable the solid focus-ring fill behind
+// the window so the blur shows through kitty's semitransparent background.
+window-rule {
+    match app-id=r"^kitty$"
+    draw-border-with-background false
+    background-effect {
+        blur true
+    }
 }
 
 gestures {

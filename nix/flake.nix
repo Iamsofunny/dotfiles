@@ -1,5 +1,5 @@
 {
-  description = "NixOS laptop — Niri Wayland desktop (greetd + waybar + swaync + swayidle/gtklock + fuzzel)";
+  description = "NixOS laptop — Niri Wayland desktop (greetd/hyprlogin + waybar + swaync + hypridle/hyprlock + fuzzel)";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -18,16 +18,21 @@
       url = "github:srinivasr/nirimod";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprlogin = {
+      url = "github:AuthenticSm1les/hyprlogin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, niri, nirimod, ... }:
+  outputs = { self, nixpkgs, home-manager, niri, nirimod, hyprlogin, ... }:
     let
       mkHost = host: nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           home-manager.nixosModules.home-manager
           niri.nixosModules.niri
-          { nixpkgs.overlays = [ niri.overlays.niri nirimod.overlays.default ]; }
+          { nixpkgs.overlays = [ niri.overlays.niri nirimod.overlays.default hyprlogin.overlays.default ]; }
           host
         ];
       };

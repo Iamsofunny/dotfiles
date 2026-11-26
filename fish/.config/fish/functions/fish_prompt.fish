@@ -1,35 +1,34 @@
-set -g pwd_color CCFF04
 set -g fish_prompt_pwd_full_dirs 999
+set -g fish_transient_prompt 1
 
-# Show directory
-function show_pwd
-  set_color normal
-  echo -n "╭──"
-  
-  set -l pwd
-  set pwd (prompt_pwd)
-  set_color $pwd_color
-  echo -s " $pwd"
-end
+# Palette (matches waybar/colors.css & fuzzel/fuzzel.ini)
+set -g _prompt_accent 4a9eff
+set -g _prompt_urgent ff5555
 
-# Show prompt w/ privilege cue
-function show_prompt
-  set_color normal
-  echo -n "╰─"
-  set -l uid (id -u $USER)
-  if [ $uid -eq 0 ]
-    set_color red
-    echo -n " # "
-  else
-    set_color $pwd_color
-    echo -n " \$ "
-  end
-end
-
-## SHOW PROMPT
 function fish_prompt
+  set -l last_status $status
+  set -l is_final 0
+  if contains -- --final-rendering $argv
+    set is_final 1
+  end
+
   echo
-  show_pwd
-  show_prompt
+
+  if test $is_final -eq 0
+    set_color $_prompt_accent
+    echo (prompt_pwd)
+  end
+
+  if fish_is_root_user
+    set_color $_prompt_urgent
+    echo -n "# "
+  else if test $is_final -eq 0 -a $last_status -ne 0
+    set_color $_prompt_urgent
+    echo -n "❯ "
+  else
+    set_color $_prompt_accent
+    echo -n "❯ "
+  end
+
   set_color normal
 end

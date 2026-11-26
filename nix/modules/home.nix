@@ -19,6 +19,7 @@
         xdg.configFile."swaync/style.css" = lib.mkForce { source = link "swaync/.config/swaync/style.css"; };
 
         xdg.configFile."fish".source = link "fish/.config/fish";
+        xdg.configFile."hypr/hyprlock.conf".source = link "hyprlock/.config/hypr/hyprlock.conf";
         xdg.configFile."kitty".source = link "kitty/.config/kitty";
         xdg.configFile."waybar".source = link "waybar/.config/waybar";
       };
